@@ -1,0 +1,32 @@
+#menu {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+button {
+ 
+font-weight:700;
+  margin-top:.6em;
+  font-size:1em;
+  height:2.5em;
+  background:#f7f7f7;
+  color:#848484;
+  cursor:pointer;
+  border-radius:3px;
+  text-align:center;
+  border:1px solid #EDEDED;
+  text-decoration:none;
+  width:6em;    
+    
+}
+
+div#div1
+{
+  font-size:20pt;
+  text-align:center;
+  color:white;
+  border:0 solid white;
+}  

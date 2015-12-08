@@ -1,1 +1,47 @@
-hello github.iotouch README.md
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<title>3次元お絵かきアプリ</title> 
+<script src="js/three.min.js"></script>
+<script src="js/StereoEffect.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/stats.min.js"></script>
+<!--<script src="js/DeviceOrientationControls.js"></script>    -->
+<script src="js/OrbitControls.js"></script>
+
+
+<!--
+    
+<script src="js/MTLLoader.js"></script>
+<script src="js/OBJMTLLoader.js"></script>
+<script src="js/loader.js"></script>
+-->
+
+    
+</head>
+<body style="background-color:#000000">
+<div id="div1">Wキー：前　Sキー：後　Dキー：右　Aキー：左　Eキー：上　Xキー：下</div>    
+
+<!-- アニメーションボタン -->
+<div id="menu">
+<button id="a" onClick="Click_text()">操作方法</button>
+<button id="a" onClick="color = 0xFF0000">Red</button>
+<button id="b" onClick="color = 0x00FFFF">Blue</button>
+<button id="c" onClick="color = 0x00FF00">Green</button>
+<button id="c" onClick="particle = 1">Particle1</button>
+<button id="c" onClick="particle = 2">Particle2</button>
+<button id="c" onClick="particle = 3">Particle3</button>
+<!--
+<button id="c" onClick="particle = 4">Particle4</button>
+<button id="c" onClick="particle = 5">Particle5</button>
+<button id="c" onClick="particle = 6">Particle6</button>
+<button id="c" onClick="particle = 8">Particle8</button>
+-->
+<button id="d" onClick="color ='';particle =''">Reset</button>    
+</div>
+
+<script src='js/main.js'></script>    
+</body>
+</html>
