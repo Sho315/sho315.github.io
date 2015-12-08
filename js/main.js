@@ -1,4 +1,5 @@
 // 1. レンダラーの作成
+var display = true;
 
   var renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -16,10 +17,6 @@
   camera.position.z = 1700;
   scene.add(camera);
 
-//// ピクセルレートを設定
-//		if(window.devicePixelRatio) {
-//			renderer.setPixelRatio(window.devicePixelRatio);
-//		}
 
 
 // 4. マウスによる操作の設定
@@ -110,7 +107,6 @@ var obj;
 var loader = new THREE.ObjectLoader();
 loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
     obj.scale.set( 5, 5, 5 );
-//    obj.position.set(0,-50,1500);
     
      // モデルをダミーオブジェクトで包む（へそ中心に回転したいため）
         chara = new THREE.Object3D();
@@ -170,11 +166,11 @@ loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
   var container = document.createElement('div');
   document.body.appendChild( container );
   container.appendChild( renderer.domElement );
-//　renderer.render( scene, camera );
+　renderer.render( scene, camera );
 
 
 //VR表示へ変換
-//var	effect = new THREE.StereoEffect(renderer);
+var	effect = new THREE.StereoEffect(renderer);
 
 
 
@@ -182,14 +178,16 @@ loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
 
 
 // 9. 銀河・地球の回転
+
+
   render();
 
   var baseTime = +new Date;
 
-  
+
 function render() {
     requestAnimationFrame( render );
-//    camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
     controls.update();
 
     mesh.rotation.z = 0.04 * (+new Date - baseTime) / 500;
@@ -205,61 +203,68 @@ function render() {
 
       }
     }
+    
+    if(display == "true"){
+        renderer.render( scene, camera );
+    }else if(display == "false"){
+        renderer.render( scene, camera );
+        effect.render(scene, camera);
+    }
 
-    renderer.render( scene, camera );
-//    effect.render(scene, camera);
   }
-
-
 
 
 
 
 // 10. リサイズ用
 
-
-
 //リサイズ処理
+
 window.addEventListener( 'resize', onWindowResize, false );
-//onWindowResize(); 
+onWindowResize(); 
 
-//  function onWindowResize() {
-//    var width = container.offsetWidth;
-//    var height = container.offsetHeight;
-//
-//    camera.aspect = width / height;
-//    camera.updateProjectionMatrix();
-//
-//    renderer.setSize(width, height);
-//    effect.setSize(width, height);
-//  }
-
+if(display == "true"){
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize( window.innerWidth, window.innerHeight );
 
   }
+}else if(display == "false"){
+  function onWindowResize() {
+    var width = container.offsetWidth;
+    var height = container.offsetHeight;
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(width, height);
+    effect.setSize(width, height);
+  }
+}
 
 
 
 
 
-///**
-//	 * フルスクリーン表示へ切り替えます。
-//	 */
-//	function fullscreen() {
-//		if (container.requestFullscreen) {
-//			container.requestFullscreen();
-//		} else if (container.msRequestFullscreen) {
-//			container.msRequestFullscreen();
-//		} else if (container.mozRequestFullScreen) {
-//			container.mozRequestFullScreen();
-//		} else if (container.webkitRequestFullscreen) {
-//			container.webkitRequestFullscreen();
-//		}
-//	}
-//
+
+
+
+/**
+	 * フルスクリーン表示へ切り替えます。
+	 */
+	function fullscreen() {
+		if (container.requestFullscreen) {
+			container.requestFullscreen();
+		} else if (container.msRequestFullscreen) {
+			container.msRequestFullscreen();
+		} else if (container.mozRequestFullScreen) {
+			container.mozRequestFullScreen();
+		} else if (container.webkitRequestFullscreen) {
+			container.webkitRequestFullscreen();
+		}
+	}
+
 //window.addEventListener("DOMContentLoaded", init, false);
 
 
