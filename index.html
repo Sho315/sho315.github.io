@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <link href="css/style.css" rel="stylesheet" type="text/css" />
-<title>3次元お絵かきアプリ</title> 
+<title>3D Painter</title> 
 <script src="js/three.min.js"></script>
 <script src="js/StereoEffect.js"></script>
 <script src="js/DeviceOrientationControls.js"></script>
@@ -28,13 +28,18 @@
 <!-- アニメーションボタン -->
 <div id="menu">
 <button id="a" onClick="Click_text()">操作方法</button>
+<!--
 <button id="a" onClick="color = 0xFF0000">Red</button>
 <button id="b" onClick="color = 0x00FFFF">Blue</button>
 <button id="c" onClick="color = 0x00FF00">Green</button>
-<button id="c" onClick="particle = 1">Particle1</button>
-<button id="c" onClick="particle = 2">Particle2</button>
-<button id="c" onClick="particle = 3">Particle3</button>
-<button id="d" onClick="color ='';particle =''">Reset</button>    
+-->
+<button id="c" onClick="particle = 1">Purple</button>
+<button id="c" onClick="particle = 2">Red</button>
+<button id="c" onClick="particle = 3">Pink</button>
+<button id="c" onClick="particle = 4">Green</button>
+<button id="c" onClick="particle = 5">Blue</button>
+
+<button id="d" onClick="color ='';particle =''">Paint停止</button>    
 <button id="c" onClick="display = 'false'">VR表示</button>
 <button id="c" onClick="display = 'true';window.location.reload();">更新</button>
 </div>

@@ -14,7 +14,7 @@ var display = true;
 // 3. カメラの作成
 
   var camera = new THREE.PerspectiveCamera(105, window.innerWidth / window.innerHeight,1, 3000);
-  camera.position.z = 1700;
+  camera.position.z = 1200;
   scene.add(camera);
 
 
@@ -111,53 +111,84 @@ loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
      // モデルをダミーオブジェクトで包む（へそ中心に回転したいため）
         chara = new THREE.Object3D();
         chara.add(obj);
-        chara.position.set(0,-50,1500);
+        chara.position.set(0,-50,1000);
     scene.add(chara);
 });
 
 
+//パーティクル
+      makeParticles();
+
+function makeParticles(){       
+    // パーティクルの数
+    particleCount = 30000;
+    particles = new THREE.Geometry();
+    // マテリアルの設定
+    var material = new THREE.PointCloudMaterial({
+        color: 0xFFFFFF,
+        size: 0.1,
+        //map: texture,
+        transparent: true
+    });
+
+    // パーティクルの位置の設定
+    for (var i = 0; i < particleCount; i++) {
+      var px = Math.random() * 2000 - 500,
+          py = Math.random() * 2000 - 500,
+          pz = Math.random() * 2000 - 500;
+      particle = new THREE.Vector3( px, py, pz);
+
+      // パーティクルのべロシティの設定
+      particle.velocity = new THREE.Vector3( 0, -Math.random(), 0 );
+      particles.vertices.push( particle );
+    }
+    pointCloud = new THREE.PointCloud( particles, material );
+    // パーティクルの深さを毎フレームソート
+    pointCloud.sortParticles = true;
+    scene.add( pointCloud );
+    }
 
 
 
 
-// 7. 周囲の銀河の作成
-
-   var geometry = new THREE.Geometry();
-
-  for (i = 0; i < 10000; i ++) { 
-      var vertex = new THREE.Vector3();
-      vertex.x = Math.random()*2000 + 30;
-      vertex.y = Math.random()*2000 + 30;
-      vertex.z = Math.random()*800+50;
-
-      if (Math.random() < 0.5) vertex.x *= -1;
-      if (Math.random() < 0.5) vertex.y *= -1;
-      if (Math.random() < 0.5) vertex.z *= -1;
-      geometry.vertices.push( vertex );
-  }
-
-
-  var material = new THREE.PointCloudMaterial( { size: 4, color:0xddddff});
-  var rot_xy = 0;
-  var rot_z = 10;
-
-  for (i = 0; i < 3; i++) {
-    var particles = new THREE.PointCloud( geometry, material );
-    particles.rotation.x = Math.random() * rot_xy;
-    particles.rotation.y = Math.random() * rot_xy;
-    particles.rotation.z = Math.random() * rot_z;
-    scene.add( particles ); 
-  }
-
-  var material = new THREE.PointCloudMaterial( { size: 5, color:0xddddff});
-
-  for (i = 0; i < 3; i++) {
-    var particles = new THREE.PointCloud( geometry, material );
-    particles.rotation.x = Math.random() * rot_xy;
-    particles.rotation.y = Math.random() * rot_xy;
-    particles.rotation.z = Math.random() * rot_z;
-    scene.add( particles ); 
-  }
+//// 7. 周囲の銀河の作成
+//
+//   var geometry = new THREE.Geometry();
+//
+//  for (i = 0; i < 10000; i ++) { 
+//      var vertex = new THREE.Vector3();
+//      vertex.x = Math.random()*2000 + 30;
+//      vertex.y = Math.random()*2000 + 30;
+//      vertex.z = Math.random()*800+50;
+//
+//      if (Math.random() < 0.5) vertex.x *= -1;
+//      if (Math.random() < 0.5) vertex.y *= -1;
+//      if (Math.random() < 0.5) vertex.z *= -1;
+//      geometry.vertices.push( vertex );
+//  }
+//
+//
+//  var material = new THREE.PointCloudMaterial( { size: 4, color:0xddddff});
+//  var rot_xy = 0;
+//  var rot_z = 10;
+//
+//  for (i = 0; i < 3; i++) {
+//    var particles = new THREE.PointCloud( geometry, material );
+//    particles.rotation.x = Math.random() * rot_xy;
+//    particles.rotation.y = Math.random() * rot_xy;
+//    particles.rotation.z = Math.random() * rot_z;
+//    scene.add( particles ); 
+//  }
+//
+//  var material = new THREE.PointCloudMaterial( { size: 5, color:0xddddff});
+//
+//  for (i = 0; i < 3; i++) {
+//    var particles = new THREE.PointCloud( geometry, material );
+//    particles.rotation.x = Math.random() * rot_xy;
+//    particles.rotation.y = Math.random() * rot_xy;
+//    particles.rotation.z = Math.random() * rot_z;
+//    scene.add( particles ); 
+//  }
 
 
 
@@ -405,33 +436,33 @@ if(color != ""){
 
 
 
-function paint_obj(chara_x,chara_y,chara_z,color){
-    
-    //お絵かき用の球体連続生成
-var geometry5 = new THREE.SphereGeometry(10, 10, 10);
-var material5 = new THREE.MeshPhongMaterial({
-color:0,
-ambient:0,
-//specular:color,
-shininess:30,
-opacity:0.9,
-transparent:true,
-emissive:color,
-metal:true,
-distance:0,
-bumpMap:THREE.ImageUtils.loadTexture('http://jsrun.it/assets/x/3/p/U/x3pUc.png'),
-bumpScale: 0.5,
-map:THREE.ImageUtils.loadTexture('http://jsrun.it/assets/x/3/p/U/x3pUc.png')
-        });
-
-  var star5 = new THREE.Mesh(geometry5, material5);
-    star5.position.x = chara_x;
-    star5.position.y = chara_y;
-    star5.position.z = chara_z;
-    
-//  star5.position.set(500,100,100);
-  scene.add(star5);
-}
+//function paint_obj(chara_x,chara_y,chara_z,color){
+//    
+//    //お絵かき用の球体連続生成
+//var geometry5 = new THREE.SphereGeometry(10, 10, 10);
+//var material5 = new THREE.MeshPhongMaterial({
+//color:0,
+//ambient:0,
+////specular:color,
+//shininess:30,
+//opacity:0.9,
+//transparent:true,
+//emissive:color,
+//metal:true,
+//distance:0,
+//bumpMap:THREE.ImageUtils.loadTexture('http://jsrun.it/assets/x/3/p/U/x3pUc.png'),
+//bumpScale: 0.5,
+//map:THREE.ImageUtils.loadTexture('http://jsrun.it/assets/x/3/p/U/x3pUc.png')
+//        });
+//
+//  var star5 = new THREE.Mesh(geometry5, material5);
+//    star5.position.x = chara_x;
+//    star5.position.y = chara_y;
+//    star5.position.z = chara_z;
+//    
+////  star5.position.set(500,100,100);
+//  scene.add(star5);
+//}
 
 
 
@@ -454,10 +485,15 @@ if(particle == 1){
     img = 'img/particle1.png';
 }else if(particle == 2){
     img = 'img/particle2.png';
-    
 }else if(particle == 3){
     img = 'img/particle3.png';
-}        
+}else if(particle == 4){
+    img = 'img/particle4.png';
+}else if(particle == 5){
+    img = 'img/particle5.png';
+}  
+    
+    
  
 // マテリアルを作成
 var texture6 =THREE.ImageUtils.loadTexture(img);
