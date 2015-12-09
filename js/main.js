@@ -174,6 +174,25 @@ var	effect = new THREE.StereoEffect(renderer);
 
 
 
+// スマートフォンの場合はジャイロセンサーでの操作へ変更
+		window.addEventListener("deviceorientation", setOrientationControls, true);
+
+/**
+	 * ジャイロセンサーでの操作へ変更します。
+	 */
+	function setOrientationControls(e) {
+		if (!e.alpha) {
+			return;
+		}
+
+		controls = new THREE.DeviceOrientationControls(camera, true);
+		controls.connect();
+		controls.update();
+
+		element.addEventListener("click", fullscreen, false);
+
+		window.removeEventListener("deviceorientation", setOrientationControls, true);
+	}
 
 
 
