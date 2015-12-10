@@ -55,7 +55,7 @@ var display = true;
       specular: 0xcccccc, 
       shininess:100, 
       metal:true,
-      map: THREE.ImageUtils.loadTexture("img/1_earth_8k.jpg") 
+      map: THREE.ImageUtils.loadTexture("img/earth.jpg") 
     });
   var mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(0,0,0);
@@ -116,26 +116,26 @@ loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
 });
 
 
-//パーティクル
+//周囲の星の生成
       makeParticles();
 
 function makeParticles(){       
     // パーティクルの数
-    particleCount = 30000;
+    particleCount = 3000;
     particles = new THREE.Geometry();
     // マテリアルの設定
     var material = new THREE.PointCloudMaterial({
         color: 0xFFFFFF,
-        size: 0.1,
+        size: 0.4,
         //map: texture,
         transparent: true
     });
 
     // パーティクルの位置の設定
     for (var i = 0; i < particleCount; i++) {
-      var px = Math.random() * 2000 - 500,
-          py = Math.random() * 2000 - 500,
-          pz = Math.random() * 2000 - 500;
+      var px = Math.random() * 2000 - 1000,
+          py = Math.random() * 2000 - 1000,
+          pz = Math.random() * 2000 - 1000;
       particle = new THREE.Vector3( px, py, pz);
 
       // パーティクルのべロシティの設定
