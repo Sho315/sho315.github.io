@@ -105,7 +105,7 @@ var material3 = new THREE.MeshPhongMaterial({
 //3Dモデルデータの生成
 var obj;
 var loader = new THREE.ObjectLoader();
-loader.load("obj/star-wars-vader-tie-fighter.json",function ( obj ) {
+loader.load("obj/star-wars-vader-tie-fighter 5.json",function ( obj ) {
     obj.scale.set( 5, 5, 5 );
     
      // モデルをダミーオブジェクトで包む（へそ中心に回転したいため）
